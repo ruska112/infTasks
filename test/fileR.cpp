@@ -9,7 +9,7 @@ int main() {
 
     while ( getline(myfile, mytext) ) {
 
-        printf("%s", mytext.c_str());
+        printf("%s\n", mytext.c_str());
 
     }
 
