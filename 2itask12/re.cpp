@@ -31,7 +31,7 @@ void HandArrCreator(double array[][maxColumns], int lines, int columns) {
 }
 
 int MainFunc(double array[][maxColumns], int lines, int columns, double &res) {
-    /*  Функция обрабатывает массив -
+    /*  Функция обрабатывает массив вещественных чисел-
      *      среди сумм элементов столбцов
      *      находит максимальный
      *
