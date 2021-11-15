@@ -45,6 +45,10 @@ int MainFunc(double array[][maxColumns], int lines, int columns, double &res) {
      *      res - максимальная сумма
      *          элементов столбцов
      *          (передаётся по ссылке)
+     *  
+     *  Программа возвращает:
+     *      0 - при успешной работе
+     *      1 - при возникновени ошибок
      */
     int result = 1;
     double maxMin = -1e20;
