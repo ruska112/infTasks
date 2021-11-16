@@ -4,5 +4,10 @@ git add ../2itask12 ../sem ../test ../gitUtil ../LICENSE ../README.md
 git commit -m "lox"
 git push
 if git | grep -q 'string'; then
-   echo "matched"
+   ruska112
 fi
+
+if git | grep -q 'string'; then
+   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
+fi
+
