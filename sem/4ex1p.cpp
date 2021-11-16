@@ -3,7 +3,7 @@
 const int maxRow = 128;
 const int maxCol = 128;
 
-int matrixRepacer(double **a, int n, int m, int &res) {
+int matrixRepacer (double **a, int n, int m, int &res) {
     int i, j;
 
     int result = 1;
