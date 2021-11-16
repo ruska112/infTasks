@@ -43,15 +43,16 @@ int main() {
     }
 
     for (i = 0; i < n; i++) {
-        for (j = 0; j < m && decrease; j++) {
-            if ( a[i][j] < a[i][j+1] ) {
+        for (j = 0; j < m-1; j++) {
+            if ( a[i][j] <= a[i][j+1] ) {
+                decrease = true;
+            } else {
                 decrease = false;
             }
         }
         if (decrease) {
             decreaseRowCount++;
         }
-        decrease = true;
     }
 
 
