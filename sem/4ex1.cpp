@@ -14,7 +14,6 @@ int main() {
     
     int decreaseRowCount = 0;
 
-
     do {
         system("clear");
         printf("Enter count of row: ");
@@ -26,6 +25,7 @@ int main() {
         printf("Enter count of column: ");
         scanf("%d", &m);
     } while (m <= 0 || m > maxCol);
+
 
 
     doubleptr *a =
