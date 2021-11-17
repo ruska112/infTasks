@@ -2,12 +2,6 @@
 
 git add ../2itask12 ../sem ../test ../gitUtil ../LICENSE ../README.md
 git commit -m "lox"
-git push
-if [ $# -eq 0 ]; then
-   ruska112
-fi
+#git push
 
-if git | grep -q 'string'; then
-   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
-fi
-
+echo <token> | git push
