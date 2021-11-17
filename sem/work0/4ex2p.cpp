@@ -3,41 +3,7 @@
 const int maxRow = 128;
 const int maxCol = 128;
 
-int matrixRepacer (double **a, int n, int m) {
-    int result = 0;
-
-    int i, j;
-
-    int negColCount = 0;
-    int posRowCount = 0;
-    double rowSum = 0;
-   
-    if ( n > 0 && n < maxRow && m > 0 && m < maxCol ) {
-        for (i = 0; i < n; i++) {
-            for (j = 0; j < m; j++) {
-                if (a[j][i] < 0) {
-                    negColCount++;
-                }
-                rowSum += a[i][j];
-            }
-
-            if (rowSum > 0) {
-                posRowCount++;
-            }
-            rowSum = 0;
-        }
-     
-        if (negColCount > posRowCount) {
-            result = 1;
-        } else if (posRowCount > negColCount) {
-            result = 2;
-        } else {
-            result = 3;
-        }
-    }
-
-    return result;
-}
+int matrixRepacer (double **a, int n, int m);
 
 int main() {
     int n, m;
@@ -99,3 +65,42 @@ int main() {
     
     return 0;
 }
+
+
+
+int matrixRepacer (double **a, int n, int m) {
+    int result = 0;
+
+    int i, j;
+
+    int negColCount = 0;
+    int posRowCount = 0;
+    double rowSum = 0;
+   
+    if ( n > 0 && n < maxRow && m > 0 && m < maxCol ) {
+        for (i = 0; i < n; i++) {
+            for (j = 0; j < m; j++) {
+                if (a[j][i] < 0) {
+                    negColCount++;
+                }
+                rowSum += a[i][j];
+            }
+
+            if (rowSum > 0) {
+                posRowCount++;
+            }
+            rowSum = 0;
+        }
+     
+        if (negColCount > posRowCount) {
+            result = 1;
+        } else if (posRowCount > negColCount) {
+            result = 2;
+        } else {
+            result = 3;
+        }
+    }
+
+    return result;
+}
+
