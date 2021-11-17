@@ -1,11 +1,10 @@
 #include <iostream>
 
-int main() {
+int main()
+{
     int num;
 
     int num1;
-
-    
 
     scanf("%d", &num);
 

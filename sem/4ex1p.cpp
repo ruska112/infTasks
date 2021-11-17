@@ -15,7 +15,7 @@ int matrixRepacer (double **a, int n, int m, int &res) {
     if ( n > 0 && n < maxRow && m > 0 && m < maxCol ) {
         for (i = 0; i < n; i++) {
             for (j = 0; j < m-1; j++) {
-                if ( a[i][j] <= a[i][j+1] ) {
+                if ( a[i][j] <= a[i][j+1] && decrease ) {
                     decrease = true;
                 } else {
                     decrease = false;
@@ -24,6 +24,7 @@ int matrixRepacer (double **a, int n, int m, int &res) {
             if (decrease) {
                 decreaseRowCount++;
             }
+            decrease = true;
         }
 
         res = decreaseRowCount;
