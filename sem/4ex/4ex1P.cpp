@@ -1,21 +1,29 @@
 #include <iostream>
 
-int matrixRepacer (double *a, int n, int m, int &res) {
+int matrixRepacer(double *a, int n, int m, int &res)
+{
     int i, j;
     int result = 1;
     bool decrease = true;
     int decreaseRowCount = 0;
 
-    if ( n > 0 && m > 0 && a != NULL) {
-        for (i = 0; i < n; i++) {
-            for (j = 0; j < m-1; j++) {
-                if ( a[i*m + j] <= a[i*m + (j+1)] && decrease ) {
+    if (n > 0 && m > 0 && a != NULL)
+    {
+        for (i = 0; i < n; i++)
+        {
+            for (j = 0; j < m - 1; j++)
+            {
+                if (a[i * m + j] <= a[i * m + (j + 1)] && decrease)
+                {
                     decrease = true;
-                } else {
+                }
+                else
+                {
                     decrease = false;
                 }
             }
-            if (decrease) {
+            if (decrease)
+            {
                 decreaseRowCount++;
             }
             decrease = true;
@@ -29,51 +37,64 @@ int matrixRepacer (double *a, int n, int m, int &res) {
     return result;
 }
 
-int main() {
+int main()
+{
 
     int n, m, res, funcRes;
     int i, j;
 
-    do {
+    do
+    {
         system("clear");
         printf("Enter count of row: ");
         scanf("%d", &n);
     } while (n <= 0);
 
-    do {
+    do
+    {
         system("clear");
         printf("Enter count of column: ");
         scanf("%d", &m);
     } while (m <= 0);
 
-    double* a = new double [n * m];
+    double *a = new double[n * m];
 
-    for (i = 0; i < n; i++) {
-        for (j = 0; j < m; j++) {
+    for (i = 0; i < n; i++)
+    {
+        for (j = 0; j < m; j++)
+        {
             printf("[%d][%d]", i, j);
-            scanf("%lf", &a[i*m + j]);
+            scanf("%lf", &a[i * m + j]);
         }
     }
 
-    if (a != NULL) {
+    if (a != NULL)
+    {
 
         funcRes = matrixRepacer(a, n, m, res);
 
-        if (funcRes == 0) {
-            for (i = 0; i < n; i++) {
-                for (j = 0; j < m; j++) {
-                    printf("%3.1lf ", a[i*m + j]);
+        if (funcRes == 0)
+        {
+            for (i = 0; i < n; i++)
+            {
+                for (j = 0; j < m; j++)
+                {
+                    printf("%3.1lf ", a[i * m + j]);
                 }
                 printf("\n");
             }
 
             printf("\nCount of lines sorted in non-decreasing order: %d\n", res);
-        } else {
+        }
+        else
+        {
             printf("\nError!\n");
         }
 
         delete[] a;
-    } else {
+    }
+    else
+    {
         printf("\nSomethingwrong with array!\n");
     }
 
