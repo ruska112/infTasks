@@ -107,13 +107,11 @@ public:
 
 int main()
 {
-
     Table myArr;
 
     myArr.ArrConstructor();
     myArr.ArrFiller();
     myArr.ArrPrintf();
-
     myArr.ArrDestructure();
     return 0;
 }
