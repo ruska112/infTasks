@@ -1,9 +1,7 @@
 #include <stdio.h>
 
-int main(void)
+int main(void) {
+    int a, b, c;
 
-{
-  int a, b, c;
-
-  return 0;
+    return 0;
 }
