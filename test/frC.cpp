@@ -6,7 +6,8 @@
 const int maxL = 128;
 const int maxC = 128;
 
-int main() {
+int main()
+{
     std::ifstream file("table.txt");
     int ok = 0;
     int lin = 5, col;
@@ -14,9 +15,12 @@ int main() {
     double arr[maxL][maxC];
 
     file >> lin;
-    if (ok == 0) {
+    if (ok == 0)
+    {
         printf("%d \n", lin);
-    } else {
+    }
+    else
+    {
         printf("error");
     }
 
@@ -25,8 +29,10 @@ int main() {
 
     int i, j;
 
-    for (i = 0; i < lin; i++) {
-        for (j = 0; j < col; j++) {
+    for (i = 0; i < lin; i++)
+    {
+        for (j = 0; j < col; j++)
+        {
             file >> elmn;
             arr[i][j] = elmn;
 
