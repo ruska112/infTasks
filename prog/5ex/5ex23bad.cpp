@@ -3,7 +3,7 @@
 
 int main()
 {
-    char name[256];
+    char name[127];
     int rowCount, columnCount, allElCount;
     int i = 0;
     int j = 0;
@@ -25,7 +25,6 @@ int main()
         myfile >> columnCount;
 
         allElCount = rowCount * columnCount;
-
         double *a = new double[allElCount];
 
         while ((myfile >> t) && (k < allElCount))
@@ -45,9 +44,13 @@ int main()
                 printf("\n");
             }
         }
+        else if (k < allElCount)
+        {
+            printf("\nFewer elements\n");
+        }
         else
         {
-            printf("Reading error!\n");
+            printf("\nReading error!\n");
         }
     }
 
