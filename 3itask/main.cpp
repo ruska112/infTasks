@@ -1,39 +1,46 @@
-#include <iostream>
+#include <cstdio>
+#include <cmath>
 
-int MainFunc(double **array, int rows, int columns, double &maxArr)
+int MainFunc(double **array, int lines, int columns, double &res)
 {
-
+    /*  Функция обрабатывает массив вещественных чисел-
+     *      среди сумм элементов столбцов
+     *      находит максимальный
+     *
+     *  Входные параметры:
+     *      array - матрица
+     *          (размеры которой lines & columns)
+     *      lines - кол-во строк
+     *      columns - кол-во столбцов
+     *
+     *  Выходной параметр:
+     *      res - максимальная сумма
+     *          элементов столбцов
+     *          (передаётся по ссылке)
+     *
+     *  Программа возвращает:
+     *      0 - при успешной работе
+     *      1 - при возникновени ошибок
+     */
     int result = 1;
-
-    int i, j;
-    bool increase = true;
     double maxMin = -1e20;
-
-    if (rows > 0 && columns > 0)
+    double tmpElement;
+    if (lines > 0 && columns > 0)
     {
-        for (i = 0; i < rows; i++)
+        int i, j;
+        for (i = 0; i < columns; i++)
         {
-            for (j = 0; j < columns - 1; j++)
-            {
-                if ((array[i][j] <= array[i][j + 1]) && increase)
-                {
-                    increase = true;
-                }
-                else
-                {
-                    increase = false;
-                }
-            }
+            tmpElement = 0;
+            for (j = 0; j < lines; j++)
+                tmpElement += array[j][i];
 
-            if (increase && (array[i][j] > maxMin))
+            if (tmpElement > maxMin)
             {
-                maxMin = array[i][j];
+                maxMin = tmpElement;
             }
-            increase = true;
         }
 
-        maxArr = maxMin;
-
+        res = maxMin;
         result = 0;
     }
 
@@ -42,7 +49,6 @@ int MainFunc(double **array, int rows, int columns, double &maxArr)
 
 int main()
 {
-    std::srand(time(0));
     int min_el, max_el, funcRes, rows, columns;
     bool mainLoop = true;
 
@@ -65,17 +71,17 @@ int main()
     // Main Menu
     do
     {
-        printf("\nChoose option:\rows");
-        printf("Create table:\rows");
-        printf("    1 - Create the table using rand;\rows");
-        printf("    2 - Create your hands;\rows");
-        printf("    3 - Create the table from file;\rows");
-        printf("4 - Process table;\rows");
-        printf("5 - Show table;\rows");
-        printf("6 - Show result;\rows");
-        printf("Exit:\rows");
-        printf("    7 - Exit with saving in file;\rows");
-        printf("    8 - Exit without saving.\rows");
+        printf("\nChoose option:\n");
+        printf("Create table:\n");
+        printf("    1 - Create the table using rand;\n");
+        printf("    2 - Create your hands;\n");
+        printf("    3 - Create the table from file;\n");
+        printf("4 - Process table;\n");
+        printf("5 - Show table;\n");
+        printf("6 - Show result;\n");
+        printf("Exit:\n");
+        printf("    7 - Exit with saving in file;\n");
+        printf("    8 - Exit without saving.\n");
         scanf("%d", &actFU);
 
         if (actFU == 1)
@@ -115,7 +121,7 @@ int main()
             }
             else
             {
-                printf("Error\rows");
+                printf("Error\n");
             }
         }
         else if (actFU == 2)
@@ -151,44 +157,51 @@ int main()
             }
             else
             {
-                printf("\nERROR\rows");
+                printf("\nERROR\n");
             }
         }
         else if (actFU == 3)
         {
-            printf("file\rows\rows");
-
             printf("Enter file name(with .txt): ");
             scanf("%s", name);
 
-            FILE *rfile;
-            rfile = fopen(name, "r");
+            FILE *readFile;
+            readFile = fopen(name, "r");
 
-            ok = fscanf(rfile, "%i", &rows);
-            if (ok && rows >= 1)
+            if (readFile)
             {
-                ok = fscanf(rfile, "%i", &columns);
-                if (ok && columns >= 1)
+                ok = fscanf(readFile, "%i", &rows);
+                if (ok && rows >= 1)
                 {
-                    arr = new double *[rows];
-
-                    for (i = 0; i < rows; i++)
+                    ok = fscanf(readFile, "%i", &columns);
+                    if (ok && columns >= 1)
                     {
-                        arr[i] = new double[columns];
-                    }
+                        arr = new double *[rows];
 
-                    for (i = 0; (i < rows) && ok; i++)
-                    {
-                        for (j = 0; (j < columns) && ok; j++)
+                        for (i = 0; i < rows; i++)
                         {
-                            ok = fscanf(rfile, "%lf", &t);
-                            if (ok == 1)
+                            arr[i] = new double[columns];
+                        }
+
+                        for (i = 0; (i < rows) && ok; i++)
+                        {
+                            for (j = 0; (j < columns) && ok; j++)
                             {
-                                arr[i][j] = t;
+                                ok = fscanf(readFile, "%lf", &t);
+                                if (ok == 1)
+                                {
+                                    arr[i][j] = t;
+                                }
                             }
                         }
+                        myBool = 1;
                     }
                 }
+                fclose(readFile);
+            }
+            else
+            {
+                printf("File dosn't open\n");
             }
         }
         else if (actFU == 4)
@@ -199,34 +212,33 @@ int main()
 
                 if (funcRes == 0)
                 {
-                    printf("\nTable has been processed\rows");
+                    printf("\nTable has been processed\n");
                     myBool = 2;
                 }
                 else
                 {
-                    printf("\nError\rows");
+                    printf("\nError\n");
                 }
             }
             else
             {
-                printf("\nYou haven't created a table\rows");
+                printf("\nYou haven't created a table\n");
             }
         }
         else if (actFU == 5)
         {
             if (myBool == 1)
             {
-                int i, j;
                 for (i = 0; i < rows; i++)
                 {
                     for (j = 0; j < columns; j++)
                         printf(" %4.2lf ", arr[i][j]);
-                    printf("\rows");
+                    printf("\n");
                 }
             }
             else
             {
-                printf("\nYou haven't created a table\rows");
+                printf("\nYou haven't created a table\n");
             }
         }
         else if (actFU == 6)
@@ -235,45 +247,50 @@ int main()
             {
                 if (funcRes == 0)
                 {
-
-                    if (maxSumRow == -1e20)
-                    {
-                        printf("All rows is decrease\rows");
-                    }
-                    else
-                    {
-                        printf("\nMAX: %4.2lf\rows", maxSumRow);
-                    }
+                    printf("\nMAX: %4.2lf\n", maxSumRow);
                 }
                 else
                 {
-                    printf("\nError\rows");
+                    printf("\nError\n");
                 }
             }
             else
             {
-                printf("\nYou haven't process a table\rows");
+                printf("\nYou haven't process a table\n");
             }
         }
         else if (actFU == 7)
         {
-            printf("7");
+            printf("Enter file name(with .txt): ");
+            scanf("%s", name);
+
+            FILE *writeFile;
+            writeFile = fopen(name, "w");
+
+            fprintf(writeFile, "%d ", rows);
+            fprintf(writeFile, "%d ", columns);
+            fprintf(writeFile, "\n");
+
             for (i = 0; i < rows; i++)
             {
+                for (j = 0; j < columns; j++)
+                {
+                    fprintf(writeFile, "%.3lf ", arr[i][j]);
+                }
                 delete[] arr[i];
+                fprintf(writeFile, "\n");
             }
-
+            fprintf(writeFile, "\nMAX:%.3lf", maxSumRow);
+            fclose(writeFile);
             delete[] arr;
             mainLoop = false;
         }
         else if (actFU == 8)
         {
-            printf("8");
             for (i = 0; i < rows; i++)
             {
                 delete[] arr[i];
             }
-
             delete[] arr;
             mainLoop = false;
         }
