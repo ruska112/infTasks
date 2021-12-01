@@ -1,22 +1,28 @@
 #include <iostream>
 #include <cmath>
 
-const double EPS = 1e-4;
-
-int MatrixBSearch(double *array, int low, int rowCount, int unit)
+int MatrixBSearch(double *array, int low, int rowCount, double unit)
 {
     int mid = (low + rowCount) / 2;
 
-    if (unit < array[mid])
+    if (low <= rowCount)
     {
-        return MatrixBSearch(array, low, mid - 1, unit);
-    }
-    else if (unit > array[mid])
-    {
-        return MatrixBSearch(array, mid + 1, rowCount, unit);
+        if (unit < array[mid])
+        {
+            return MatrixBSearch(array, low, mid - 1, unit);
+        }
+        else if (unit > array[mid])
+        {
+            return MatrixBSearch(array, mid + 1, rowCount, unit);
+        }
+        else
+        {
+            return mid;
+        }
     }
     else
     {
+        mid = -1;
         return mid;
     }
 }
@@ -47,7 +53,16 @@ int main()
 
     unitIndx = MatrixBSearch(arr, 0, rowC, unit);
 
-    printf("Index of %.2lf is %d\n", unit, unitIndx);
+    if (unitIndx != -1)
+    {
+        printf("Index of %lf is %d\n", unit, unitIndx);
+    }
+    else
+    {
+        printf("Not Found\n");
+    }
+
+    delete[] arr;
 
     return 0;
 }

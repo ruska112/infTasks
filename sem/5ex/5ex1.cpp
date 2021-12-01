@@ -1,17 +1,19 @@
 #include <iostream>
+#include <cmath>
 
-const double EPS = 1e-4;
+const double EPS = 1e-8;
 
-int MatrixSeacrh(double *array, int rowCount, int unit, int &res)
+int MatrixSeacrh(double *array, int rowCount, double unit, int &res)
 {
     int i;
     int result = 1;
+    double delta;
 
     if (array != NULL && rowCount >= 1)
     {
         for (i = 0; i < rowCount; i++)
         {
-            if ((unit - array[i]) <= EPS)
+            if (fabs(unit - array[i]) <= EPS)
             {
                 res = i;
             }
@@ -51,12 +53,14 @@ int main()
 
     if (funcRes == 0)
     {
-        printf("Index of %.2lf is %d\n", unit, unitIndx);
+        printf("Index of %lf is %d\n", unit, unitIndx);
     }
     else
     {
         printf("\nError\n\n");
     }
+
+    delete[] arr;
 
     return 0;
 }

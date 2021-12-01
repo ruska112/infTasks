@@ -1,4 +1,7 @@
 #include <iostream>
+#include <cmath>
+
+const double EPS = 1e-8;
 
 int MatrixSearch(double *array, int rowCount, double unit, int &res)
 {
@@ -18,14 +21,13 @@ int MatrixSearch(double *array, int rowCount, double unit, int &res)
         {
             low = mid + 1;
         }
-        else
+        else if (fabs(unit - array[mid]) < EPS)
         {
             res = mid;
             result = 0;
             break;
         }
-    }
-
+        }
     return result;
 }
 
@@ -58,7 +60,7 @@ int main()
 
     if (funcRes == 0)
     {
-        printf("Index of %.2lf is %d\n", unit, unitIndx);
+        printf("Index of %lf is %d\n", unit, unitIndx);
     }
     else if (funcRes == 2)
     {
@@ -68,6 +70,8 @@ int main()
     {
         printf("Error\n");
     }
+
+    delete[] arr;
 
     return 0;
 }
